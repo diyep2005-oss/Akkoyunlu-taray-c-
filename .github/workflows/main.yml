@@ -14,9 +14,13 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: 8.9
+      - name: Zip dosyasını aç
+        run: |
+          unzip -q -o "$(ls *.zip | head -n 1)" -d proje
+          ls proje
       - name: Debug APK derle
-        run: gradle assembleDebug --no-daemon
+        run: gradle assembleDebug --no-daemon -p proje
       - uses: actions/upload-artifact@v4
         with:
           name: Gokboru-Browser-APK
-          path: app/build/outputs/apk/debug/*.apk
+          path: proje/app/build/outputs/apk/debug/*.apk
