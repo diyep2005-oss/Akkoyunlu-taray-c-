@@ -17,7 +17,7 @@ jobs:
       - name: Zip dosyasını aç
         run: |
           unzip -q -o "$(ls *.zip | head -n 1)" -d proje
-          ls proje
+          sed -i 's/blockNetworkImages/blockNetworkImage/' proje/app/src/main/java/com/gokboru/browser/MainActivity.kt
       - name: Debug APK derle
         run: gradle assembleDebug --no-daemon -p proje
       - uses: actions/upload-artifact@v4
